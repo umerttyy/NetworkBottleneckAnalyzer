@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Bottleneck Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Gaming Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Particles.js for background effects -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Gaming Background Grid -->
+    <div class="gaming-grid"></div>
+    
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <div class="language-dropdown">
+            <button class="language-btn" onclick="toggleLanguageDropdown()">
+                <span class="current-flag">🇬🇧</span>
+                <span class="current-lang">English</span>
+                <i data-feather="chevron-down" class="lang-arrow"></i>
+            </button>
+            <div class="language-menu" id="languageMenu">
+                <div class="language-option" onclick="changeLanguage('en', '🇬🇧', 'English')">
+                    <span class="flag">🇬🇧</span>
+                    <span class="lang-name">English</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('in', '🇮🇳', 'हिंदी')">
+                    <span class="flag">🇮🇳</span>
+                    <span class="lang-name">हिंदी</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('pt', '🇵🇹', 'Português')">
+                    <span class="flag">🇵🇹</span>
+                    <span class="lang-name">Português</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('ru', '🇷🇺', 'Русский')">
+                    <span class="flag">🇷🇺</span>
+                    <span class="lang-name">Русский</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('fr', '🇫🇷', 'Français')">
+                    <span class="flag">🇫🇷</span>
+                    <span class="lang-name">Français</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('bd', '🇧🇩', 'বাংলা')">
+                    <span class="flag">🇧🇩</span>
+                    <span class="lang-name">বাংলা</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('tr', '🇹🇷', 'Türkçe')">
+                    <span class="flag">🇹🇷</span>
+                    <span class="lang-name">Türkçe</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('cn', '🇨🇳', '中文')">
+                    <span class="flag">🇨🇳</span>
+                    <span class="lang-name">中文</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('br', '🇧🇷', 'Português (BR)')">
+                    <span class="flag">🇧🇷</span>
+                    <span class="lang-name">Português (BR)</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('es', '🇪🇸', 'Español')">
+                    <span class="flag">🇪🇸</span>
+                    <span class="lang-name">Español</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('eg', '🇪🇬', 'العربية')">
+                    <span class="flag">🇪🇬</span>
+                    <span class="lang-name">العربية</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('pk', '🇵🇰', 'اردو')">
+                    <span class="flag">🇵🇰</span>
+                    <span class="lang-name">اردو</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('vn', '🇻🇳', 'Tiếng Việt')">
+                    <span class="flag">🇻🇳</span>
+                    <span class="lang-name">Tiếng Việt</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('sa', '🇸🇦', 'العربية (SA)')">
+                    <span class="flag">🇸🇦</span>
+                    <span class="lang-name">العربية (SA)</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('de', '🇩🇪', 'Deutsch')">
+                    <span class="flag">🇩🇪</span>
+                    <span class="lang-name">Deutsch</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('jp', '🇯🇵', '日本語')">
+                    <span class="flag">🇯🇵</span>
+                    <span class="lang-name">日本語</span>
+                </div>
+                <div class="language-option" onclick="changeLanguage('mx', '🇲🇽', 'Español (MX)')">
+                    <span class="flag">🇲🇽</span>
+                    <span class="lang-name">Español (MX)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i data-feather="zap"></i>
+                    <div class="icon-glow"></div>
+                </div>
+                <span data-translate="title" class="logo-text">PC Bottleneck Calculator</span>
+            </div>
+            <p class="subtitle" data-translate="subtitle">Find the perfect balance between your CPU and GPU for optimal gaming performance</p>
+            
+            <!-- Gaming Stats Bar -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-number" data-counter="1000000">0</span>
+                    <span class="stat-label">Calculations</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-counter="50000">0</span>
+                    <span class="stat-label">Gamers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-counter="17">0</span>
+                    <span class="stat-label">Languages</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Calculator Section -->
+        <div class="calculator-section">
+            <div class="selection-grid">
+                <!-- CPU Selection -->
+                <div class="selection-item">
+                    <label for="cpuSelect" data-translate="selectCpu">Select CPU</label>
+                    <div class="dropdown-wrapper">
+                        <select id="cpuSelect" onchange="onCpuChange(this.value)">
+                            <option value="" data-translate="chooseCpu">Choose CPU</option>
+                        </select>
+                        <i data-feather="chevron-down" class="dropdown-icon"></i>
+                    </div>
+                    <div class="component-image" id="cpuImage">
+                        <div class="placeholder-text" data-translate="selectedCpu">Selected CPU</div>
+                    </div>
+                </div>
+
+                <!-- GPU Selection -->
+                <div class="selection-item">
+                    <label for="gpuSelect" data-translate="selectGpu">Select GPU</label>
+                    <div class="dropdown-wrapper">
+                        <select id="gpuSelect" onchange="onGpuChange(this.value)">
+                            <option value="" data-translate="chooseGpu">Choose GPU</option>
+                        </select>
+                        <i data-feather="chevron-down" class="dropdown-icon"></i>
+                    </div>
+                    <div class="component-image" id="gpuImage">
+                        <div class="placeholder-text" data-translate="selectedGpu">Selected GPU</div>
+                    </div>
+                </div>
+
+                <!-- Resolution Selection -->
+                <div class="selection-item">
+                    <label for="resolutionSelect" data-translate="gamingResolution">Gaming Resolution</label>
+                    <div class="dropdown-wrapper">
+                        <select id="resolutionSelect" onchange="onResolutionChange(this.value)">
+                            <option value="" data-translate="chooseResolution">Choose Resolution</option>
+                        </select>
+                        <i data-feather="chevron-down" class="dropdown-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calculate Button -->
+            <button id="calculateBtn" class="calculate-btn" onclick="calculateBottleneck()" disabled>
+                <div class="btn-bg-effect"></div>
+                <div class="btn-content">
+                    <i data-feather="activity"></i>
+                    <span data-translate="calculateBottleneck">Calculate Bottleneck</span>
+                </div>
+                <div class="btn-glow"></div>
+            </button>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="results-section" style="display: none;">
+            <h2 data-translate="analysisResults">Analysis Results</h2>
+            
+            <!-- Bottleneck Percentage -->
+            <div class="bottleneck-result">
+                <div class="percentage-display">
+                    <div class="percentage-circle">
+                        <svg class="progress-ring" width="200" height="200">
+                            <defs>
+                                <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00f5ff;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ff006e;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="100" cy="100" r="90" stroke="#1e293b" stroke-width="8" fill="none"/>
+                            <circle id="progressCircle" cx="100" cy="100" r="90" stroke="url(#progressGradient)" stroke-width="8" fill="none" 
+                                    stroke-linecap="round" stroke-dasharray="565.48" stroke-dashoffset="565.48"/>
+                        </svg>
+                        <div class="percentage-text">
+                            <span id="bottleneckPercentage">0%</span>
+                            <div class="percentage-label">Bottleneck</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-status" id="resultStatus">
+                    <span data-translate="moderateBottleneck">Moderate bottleneck detected</span>
+                </div>
+            </div>
+
+            <!-- Performance Chart -->
+            <div class="chart-container">
+                <canvas id="performanceChart"></canvas>
+            </div>
+
+            <!-- Recommendation -->
+            <div class="recommendation" id="recommendation">
+                <h3 data-translate="recommendation">Recommendation</h3>
+                <p id="recommendationText"></p>
+            </div>
+        </div>
+
+        <!-- Gaming Performance Estimator -->
+        <div id="gamingSection" class="gaming-section" style="display: none;">
+            <h2 data-translate="gamingPerformanceEstimator">Gaming Performance Estimator</h2>
+            <p class="gaming-subtitle" data-translate="estimatedFps">Estimated FPS for popular games with your selected components</p>
+            
+            <div class="games-grid" id="gamesGrid">
+                <!-- Game performance cards will be populated dynamically -->
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-section">
+            <h2 data-translate="whyUseCalculator">Why Use Our Calculator?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-feather="target"></i>
+                    </div>
+                    <h3 data-translate="accurateAnalysis">Accurate Analysis</h3>
+                    <p data-translate="accurateAnalysisDesc">Get precise bottleneck calculations based on real-world performance data and benchmarks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-feather="smartphone"></i>
+                    </div>
+                    <h3 data-translate="mobileOptimized">Mobile Optimized</h3>
+                    <p data-translate="mobileOptimizedDesc">Access our calculator from any device with a fully responsive design that works everywhere.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-feather="globe"></i>
+                    </div>
+                    <h3 data-translate="multiLanguage">Multi-Language</h3>
+                    <p data-translate="multiLanguageDesc">Available in 17+ languages to serve PC enthusiasts around the world.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-feather="zap"></i>
+                    </div>
+                    <h3 data-translate="instantResults">Instant Results</h3>
+                    <p data-translate="instantResultsDesc">Beautiful charts and graphs make it easy to understand your system's performance immediately.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-feather="eye"></i>
+                    </div>
+                    <h3 data-translate="visualResults">Visual Results</h3>
+                    <p data-translate="visualResultsDesc">Instant calculations with no waiting time. See your results immediately.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-feather="github"></i>
+                    </div>
+                    <h3 data-translate="githubIntegration">GitHub Integration</h3>
+                    <p data-translate="githubIntegrationDesc">Automatic updates via GitHub JSON database - always current with latest hardware.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p data-translate="footerText">Find the perfect balance between your CPU and GPU for optimal gaming performance.</p>
+            <p data-translate="footerCredit">Powered by GitHub JSON Database | Automatic hardware updates</p>
+        </footer>
+    </div>
+
+    <script>
+        // Global variables
+        let hardwareData = {};
+        let selectedCpu = null;
+        let selectedGpu = null;
+        let selectedResolution = null;
+        let performanceChart = null;
+        let currentLanguage = 'en';
+
+        // Translation object
+        const translations = {
+            en: {
+                title: "PC Bottleneck Calculator",
+                subtitle: "Find the perfect balance between your CPU and GPU for optimal gaming performance",
+                selectCpu: "Select CPU",
+                selectGpu: "Select GPU",
+                gamingResolution: "Gaming Resolution",
+                chooseCpu: "Choose CPU",
+                chooseGpu: "Choose GPU", 
+                chooseResolution: "Choose Resolution",
+                selectedCpu: "Selected CPU",
+                selectedGpu: "Selected GPU",
+                calculateBottleneck: "Calculate Bottleneck",
+                analysisResults: "Analysis Results",
+                moderateBottleneck: "Moderate bottleneck detected",
+                recommendation: "Recommendation",
+                gamingPerformanceEstimator: "Gaming Performance Estimator",
+                estimatedFps: "Estimated FPS for popular games with your selected components",
+                whyUseCalculator: "Why Use Our Calculator?",
+                accurateAnalysis: "Accurate Analysis",
+                accurateAnalysisDesc: "Get precise bottleneck calculations based on real-world performance data and benchmarks.",
+                mobileOptimized: "Mobile Optimized",
+                mobileOptimizedDesc: "Access our calculator from any device with a fully responsive design that works everywhere.",
+                multiLanguage: "Multi-Language",
+                multiLanguageDesc: "Available in 17+ languages to serve PC enthusiasts around the world.",
+                instantResults: "Instant Results",
+                instantResultsDesc: "Beautiful charts and graphs make it easy to understand your system's performance immediately.",
+                visualResults: "Visual Results",
+                visualResultsDesc: "Instant calculations with no waiting time. See your results immediately.",
+                githubIntegration: "GitHub Integration",
+                githubIntegrationDesc: "Automatic updates via GitHub JSON database - always current with latest hardware.",
+                footerText: "Find the perfect balance between your CPU and GPU for optimal gaming performance.",
+                footerCredit: "Powered by GitHub JSON Database | Automatic hardware updates"
+            },
+            in: {
+                title: "पीसी बाधा कैलकुलेटर",
+                subtitle: "इष्टतम गेमिंग प्रदर्शन के लिए अपने सीपीयू और जीपीयू के बीच सही संतुलन खोजें",
+                selectCpu: "सीपीयू चुनें",
+                selectGpu: "जीपीयू चुनें",
+                gamingResolution: "गेमिंग रिज़ॉल्यूशन",
+                chooseCpu: "सीपीयू चुनें",
+                chooseGpu: "जीपीयू चुनें",
+                chooseResolution: "रिज़ॉल्यूशन चुनें",
+                selectedCpu: "चुना गया सीपीयू",
+                selectedGpu: "चुना गया जीपीयू",
+                calculateBottleneck: "बाधा की गणना करें",
+                analysisResults: "विश्लेषण परिणाम",
+                moderateBottleneck: "मध्यम बाधा का पता चला",
+                recommendation: "सिफारिश",
+                gamingPerformanceEstimator: "गेमिंग प्रदर्शन अनुमानक",
+                estimatedFps: "आपके चुने गए घटकों के साथ लोकप्रिय गेम्स के लिए अनुमानित एफपीएस",
+                whyUseCalculator: "हमारे कैलकुलेटर का उपयोग क्यों करें?",
+                accurateAnalysis: "सटीक विश्लेषण",
+                accurateAnalysisDesc: "वास्तविक दुनिया के प्रदर्शन डेटा और बेंचमार्क के आधार पर सटीक बाधा गणना प्राप्त करें।",
+                mobileOptimized: "मोबाइल अनुकूलित",
+                mobileOptimizedDesc: "पूर्णतः उत्तरदायी डिज़ाइन के साथ किसी भी डिवाइस से हमारे कैलकुलेटर तक पहुंचें।",
+                multiLanguage: "बहु-भाषा",
+                multiLanguageDesc: "दुनिया भर के पीसी उत्साही लोगों की सेवा के लिए 17+ भाषाओं में उपलब्ध।",
+                instantResults: "तत्काल परिणाम",
+                instantResultsDesc: "सुंदर चार्ट और ग्राफ़ आपके सिस्टम के प्रदर्शन को तुरंत समझना आसान बनाते हैं।",
+                visualResults: "दृश्य परिणाम",
+                visualResultsDesc: "बिना किसी प्रतीक्षा समय के तत्काल गणना। अपने परिणाम तुरंत देखें।",
+                githubIntegration: "गिटहब एकीकरण",
+                githubIntegrationDesc: "गिटहब JSON डेटाबेस के माध्यम से स्वचालित अपडेट - नवीनतम हार्डवेयर के साथ हमेशा अद्यतन।",
+                footerText: "इष्टतम गेमिंग प्रदर्शन के लिए अपने सीपीयू और जीपीयू के बीच सही संतुलन खोजें।",
+                footerCredit: "गिटहब JSON डेटाबेस द्वारा संचालित | स्वचालित हार्डवेयर अपडेट"
+            },
+            pt: {
+                title: "Calculadora de Gargalo do PC",
+                subtitle: "Encontre o equilíbrio perfeito entre sua CPU e GPU para desempenho ideal em jogos",
+                selectCpu: "Selecionar CPU",
+                selectGpu: "Selecionar GPU", 
+                gamingResolution: "Resolução de Jogos",
+                chooseCpu: "Escolher CPU",
+                chooseGpu: "Escolher GPU",
+                chooseResolution: "Escolher Resolução",
+                selectedCpu: "CPU Selecionada",
+                selectedGpu: "GPU Selecionada",
+                calculateBottleneck: "Calcular Gargalo",
+                analysisResults: "Resultados da Análise",
+                moderateBottleneck: "Gargalo moderado detectado",
+                recommendation: "Recomendação",
+                gamingPerformanceEstimator: "Estimador de Desempenho em Jogos",
+                estimatedFps: "FPS estimado para jogos populares com seus componentes selecionados",
+                whyUseCalculator: "Por que usar nossa calculadora?",
+                accurateAnalysis: "Análise Precisa",
+                accurateAnalysisDesc: "Obtenha cálculos precisos de gargalo baseados em dados de desempenho do mundo real e benchmarks.",
+                mobileOptimized: "Otimizado para Mobile",
+                mobileOptimizedDesc: "Acesse nossa calculadora de qualquer dispositivo com um design totalmente responsivo.",
+                multiLanguage: "Multi-idioma",
+                multiLanguageDesc: "Disponível em 17+ idiomas para atender entusiastas de PC ao redor do mundo.",
+                instantResults: "Resultados Instantâneos",
+                instantResultsDesc: "Gráficos bonitos facilitam o entendimento do desempenho do seu sistema imediatamente.",
+                visualResults: "Resultados Visuais",
+                visualResultsDesc: "Cálculos instantâneos sem tempo de espera. Veja seus resultados imediatamente.",
+                githubIntegration: "Integração GitHub",
+                githubIntegrationDesc: "Atualizações automáticas via banco de dados JSON do GitHub - sempre atual com o hardware mais recente.",
+                footerText: "Encontre o equilíbrio perfeito entre sua CPU e GPU para desempenho ideal em jogos.",
+                footerCredit: "Alimentado pelo Banco de Dados JSON do GitHub | Atualizações automáticas de hardware"
+            },
+            ru: {
+                title: "Калькулятор узких мест ПК",
+                subtitle: "Найдите идеальный баланс между вашим процессором и видеокартой для оптимальной игровой производительности",
+                selectCpu: "Выбрать процессор",
+                selectGpu: "Выбрать видеокарту",
+                gamingResolution: "Игровое разрешение",
+                chooseCpu: "Выбрать процессор",
+                chooseGpu: "Выбрать видеокарту",
+                chooseResolution: "Выбрать разрешение",
+                selectedCpu: "Выбранный процессор",
+                selectedGpu: "Выбранная видеокарта",
+                calculateBottleneck: "Рассчитать узкое место",
+                analysisResults: "Результаты анализа",
+                moderateBottleneck: "Обнаружено умеренное узкое место",
+                recommendation: "Рекомендация",
+                gamingPerformanceEstimator: "Оценщик игровой производительности",
+                estimatedFps: "Предполагаемый FPS для популярных игр с вашими выбранными компонентами",
+                whyUseCalculator: "Почему стоит использовать наш калькулятор?",
+                accurateAnalysis: "Точный анализ",
+                accurateAnalysisDesc: "Получите точные расчеты узких мест на основе реальных данных производительности и бенчмарков.",
+                mobileOptimized: "Оптимизировано для мобильных",
+                mobileOptimizedDesc: "Получите доступ к нашему калькулятору с любого устройства с полностью адаптивным дизайном.",
+                multiLanguage: "Многоязычность",
+                multiLanguageDesc: "Доступно на 17+ языках для обслуживания энтузиастов ПК по всему миру.",
+                instantResults: "Мгновенные результаты",
+                instantResultsDesc: "Красивые графики и диаграммы облегчают понимание производительности вашей системы.",
+                visualResults: "Визуальные результаты",
+                visualResultsDesc: "Мгновенные вычисления без времени ожидания. Увидьте свои результаты немедленно.",
+                githubIntegration: "Интеграция с GitHub",
+                githubIntegrationDesc: "Автоматические обновления через базу данных GitHub JSON - всегда актуальные данные о новейшем оборудовании.",
+                footerText: "Найдите идеальный баланс между вашим процессором и видеокартой для оптимальной игровой производительности.",
+                footerCredit: "Работает на базе данных GitHub JSON | Автоматические обновления оборудования"
+            },
+            fr: {
+                title: "Calculateur de Goulot d'Étranglement PC",
+                subtitle: "Trouvez l'équilibre parfait entre votre CPU et GPU pour des performances de jeu optimales",
+                selectCpu: "Sélectionner CPU",
+                selectGpu: "Sélectionner GPU",
+                gamingResolution: "Résolution de Jeu",
+                chooseCpu: "Choisir CPU",
+                chooseGpu: "Choisir GPU",
+                chooseResolution: "Choisir Résolution",
+                selectedCpu: "CPU Sélectionné",
+                selectedGpu: "GPU Sélectionné",
+                calculateBottleneck: "Calculer le Goulot",
+                analysisResults: "Résultats d'Analyse",
+                moderateBottleneck: "Goulot d'étranglement modéré détecté",
+                recommendation: "Recommandation",
+                gamingPerformanceEstimator: "Estimateur de Performance de Jeu",
+                estimatedFps: "FPS estimé pour les jeux populaires avec vos composants sélectionnés",
+                whyUseCalculator: "Pourquoi utiliser notre calculateur?",
+                accurateAnalysis: "Analyse Précise",
+                accurateAnalysisDesc: "Obtenez des calculs précis de goulot d'étranglement basés sur des données de performance réelles et des benchmarks.",
+                mobileOptimized: "Optimisé Mobile",
+                mobileOptimizedDesc: "Accédez à notre calculateur depuis n'importe quel appareil avec un design entièrement responsive.",
+                multiLanguage: "Multi-Langues",
+                multiLanguageDesc: "Disponible en 17+ langues pour servir les passionnés de PC du monde entier.",
+                instantResults: "Résultats Instantanés",
+                instantResultsDesc: "De beaux graphiques rendent facile la compréhension des performances de votre système immédiatement.",
+                visualResults: "Résultats Visuels",
+                visualResultsDesc: "Calculs instantanés sans temps d'attente. Voyez vos résultats immédiatement.",
+                githubIntegration: "Intégration GitHub",
+                githubIntegrationDesc: "Mises à jour automatiques via la base de données JSON GitHub - toujours à jour avec le matériel le plus récent.",
+                footerText: "Trouvez l'équilibre parfait entre votre CPU et GPU pour des performances de jeu optimales.",
+                footerCredit: "Alimenté par la Base de Données JSON GitHub | Mises à jour automatiques du matériel"
+            },
+            bd: {
+                title: "পিসি বাধা ক্যালকুলেটর",
+                subtitle: "সর্বোত্তম গেমিং পারফরম্যান্সের জন্য আপনার সিপিইউ এবং জিপিইউর মধ্যে নিখুঁত ভারসাম্য খুঁজে নিন",
+                selectCpu: "সিপিইউ নির্বাচন করুন",
+                selectGpu: "জিপিইউ নির্বাচন করুন",
+                gamingResolution: "গেমিং রেজোলিউশন",
+                chooseCpu: "সিপিইউ বেছে নিন",
+                chooseGpu: "জিপিইউ বেছে নিন",
+                chooseResolution: "রেজোলিউশন বেছে নিন",
+                selectedCpu: "নির্বাচিত সিপিইউ",
+                selectedGpu: "নির্বাচিত জিপিইউ",
+                calculateBottleneck: "বাধা গণনা করুন",
+                analysisResults: "বিশ্লেষণ ফলাফল",
+                moderateBottleneck: "মধ্যম বাধা সনাক্ত করা হয়েছে",
+                recommendation: "সুপারিশ",
+                gamingPerformanceEstimator: "গেমিং পারফরম্যান্স অনুমানকারী",
+                estimatedFps: "আপনার নির্বাচিত উপাদানগুলির সাথে জনপ্রিয় গেমগুলির জন্য অনুমানিত এফপিএস"
+            },
+            tr: {
+                title: "PC Darboğaz Hesaplayıcısı",
+                subtitle: "Optimal oyun performansı için CPU ve GPU'nuz arasındaki mükemmel dengeyi bulun",
+                selectCpu: "CPU Seç",
+                selectGpu: "GPU Seç",
+                gamingResolution: "Oyun Çözünürlüğü",
+                chooseCpu: "CPU Seçin",
+                chooseGpu: "GPU Seçin",
+                chooseResolution: "Çözünürlük Seçin",
+                selectedCpu: "Seçilen CPU",
+                selectedGpu: "Seçilen GPU",
+                calculateBottleneck: "Darboğazı Hesapla",
+                analysisResults: "Analiz Sonuçları",
+                moderateBottleneck: "Orta düzeyde darboğaz tespit edildi",
+                recommendation: "Öneri",
+                gamingPerformanceEstimator: "Oyun Performans Tahmincisi",
+                estimatedFps: "Seçtiğiniz bileşenlerle popüler oyunlar için tahmini FPS"
+            },
+            cn: {
+                title: "PC瓶颈计算器",
+                subtitle: "为您的CPU和GPU找到完美平衡，实现最佳游戏性能",
+                selectCpu: "选择CPU",
+                selectGpu: "选择GPU",
+                gamingResolution: "游戏分辨率",
+                chooseCpu: "选择CPU",
+                chooseGpu: "选择GPU",
+                chooseResolution: "选择分辨率",
+                selectedCpu: "已选择的CPU",
+                selectedGpu: "已选择的GPU",
+                calculateBottleneck: "计算瓶颈",
+                analysisResults: "分析结果",
+                moderateBottleneck: "检测到中等瓶颈",
+                recommendation: "建议",
+                gamingPerformanceEstimator: "游戏性能估算器",
+                estimatedFps: "使用您选择的组件运行热门游戏的预估FPS"
+            },
+            br: {
+                title: "Calculadora de Gargalo do PC",
+                subtitle: "Encontre o equilíbrio perfeito entre sua CPU e GPU para desempenho ideal em jogos",
+                selectCpu: "Selecionar CPU",
+                selectGpu: "Selecionar GPU",
+                gamingResolution: "Resolução de Jogos",
+                chooseCpu: "Escolher CPU",
+                chooseGpu: "Escolher GPU",
+                chooseResolution: "Escolher Resolução",
+                selectedCpu: "CPU Selecionada",
+                selectedGpu: "GPU Selecionada",
+                calculateBottleneck: "Calcular Gargalo",
+                analysisResults: "Resultados da Análise",
+                moderateBottleneck: "Gargalo moderado detectado",
+                recommendation: "Recomendação",
+                gamingPerformanceEstimator: "Estimador de Desempenho em Jogos",
+                estimatedFps: "FPS estimado para jogos populares com seus componentes selecionados"
+            },
+            es: {
+                title: "Calculadora de Cuello de Botella PC",
+                subtitle: "Encuentra el equilibrio perfecto entre tu CPU y GPU para un rendimiento óptimo en juegos",
+                selectCpu: "Seleccionar CPU",
+                selectGpu: "Seleccionar GPU",
+                gamingResolution: "Resolución de Juegos",
+                chooseCpu: "Elegir CPU",
+                chooseGpu: "Elegir GPU",
+                chooseResolution: "Elegir Resolución",
+                selectedCpu: "CPU Seleccionada",
+                selectedGpu: "GPU Seleccionada",
+                calculateBottleneck: "Calcular Cuello de Botella",
+                analysisResults: "Resultados del Análisis",
+                moderateBottleneck: "Cuello de botella moderado detectado",
+                recommendation: "Recomendación",
+                gamingPerformanceEstimator: "Estimador de Rendimiento en Juegos",
+                estimatedFps: "FPS estimado para juegos populares con tus componentes seleccionados"
+            },
+            eg: {
+                title: "حاسبة عنق الزجاجة للكمبيوتر",
+                subtitle: "اعثر على التوازن المثالي بين وحدة المعالجة المركزية ووحدة معالجة الرسوميات لأداء مثالي في الألعاب",
+                selectCpu: "اختر وحدة المعالجة المركزية",
+                selectGpu: "اختر وحدة معالجة الرسوميات",
+                gamingResolution: "دقة الألعاب",
+                chooseCpu: "اختر وحدة المعالجة المركزية",
+                chooseGpu: "اختر وحدة معالجة الرسوميات",
+                chooseResolution: "اختر الدقة",
+                selectedCpu: "وحدة المعالجة المركزية المختارة",
+                selectedGpu: "وحدة معالجة الرسوميات المختارة",
+                calculateBottleneck: "احسب عنق الزجاجة",
+                analysisResults: "نتائج التحليل",
+                moderateBottleneck: "تم اكتشاف عنق زجاجة متوسط",
+                recommendation: "التوصية",
+                gamingPerformanceEstimator: "مقدر أداء الألعاب",
+                estimatedFps: "معدل الإطارات المقدر للألعاب الشائعة مع المكونات المختارة"
+            },
+            pk: {
+                title: "پی سی بوتل نیک کیلکولیٹر",
+                subtitle: "بہترین گیمنگ کارکردگی کے لیے اپنے سی پی یو اور جی پی یو کے درمیان کامل توازن تلاش کریں",
+                selectCpu: "سی پی یو منتخب کریں",
+                selectGpu: "جی پی یو منتخب کریں",
+                gamingResolution: "گیمنگ ریزولیوشن",
+                chooseCpu: "سی پی یو چنیں",
+                chooseGpu: "جی پی یو چنیں",
+                chooseResolution: "ریزولیوشن چنیں",
+                selectedCpu: "منتخب شدہ سی پی یو",
+                selectedGpu: "منتخب شدہ جی پی یو",
+                calculateBottleneck: "بوتل نیک کا حساب لگائیں",
+                analysisResults: "تجزیہ کے نتائج",
+                moderateBottleneck: "درمیانہ بوتل نیک کا پتہ چلا",
+                recommendation: "سفارش",
+                gamingPerformanceEstimator: "گیمنگ کارکردگی کا تخمینہ لگانے والا",
+                estimatedFps: "آپ کے منتخب کردہ اجزاء کے ساتھ مقبول گیمز کے لیے تخمینی ایف پی ایس"
+            },
+            vn: {
+                title: "Máy Tính Nút Thắt Cổ Chai PC",
+                subtitle: "Tìm sự cân bằng hoàn hảo giữa CPU và GPU của bạn để có hiệu suất chơi game tối ưu",
+                selectCpu: "Chọn CPU",
+                selectGpu: "Chọn GPU",
+                gamingResolution: "Độ Phân Giải Gaming",
+                chooseCpu: "Chọn CPU",
+                chooseGpu: "Chọn GPU",
+                chooseResolution: "Chọn Độ Phân Giải",
+                selectedCpu: "CPU Đã Chọn",
+                selectedGpu: "GPU Đã Chọn",
+                calculateBottleneck: "Tính Nút Thắt Cổ Chai",
+                analysisResults: "Kết Quả Phân Tích",
+                moderateBottleneck: "Phát hiện nút thắt cổ chai vừa phải",
+                recommendation: "Khuyến Nghị",
+                gamingPerformanceEstimator: "Công Cụ Ước Tính Hiệu Suất Gaming",
+                estimatedFps: "FPS ước tính cho các game phổ biến với các linh kiện bạn đã chọn"
+            },
+            sa: {
+                title: "حاسبة عنق الزجاجة للكمبيوتر",
+                subtitle: "اعثر على التوازن المثالي بين وحدة المعالجة المركزية ووحدة معالجة الرسوميات لأداء مثالي في الألعاب",
+                selectCpu: "اختر وحدة المعالجة المركزية",
+                selectGpu: "اختر وحدة معالجة الرسوميات",
+                gamingResolution: "دقة الألعاب",
+                chooseCpu: "اختر وحدة المعالجة المركزية",
+                chooseGpu: "اختر وحدة معالجة الرسوميات",
+                chooseResolution: "اختر الدقة",
+                selectedCpu: "وحدة المعالجة المركزية المختارة",
+                selectedGpu: "وحدة معالجة الرسوميات المختارة",
+                calculateBottleneck: "احسب عنق الزجاجة",
+                analysisResults: "نتائج التحليل",
+                moderateBottleneck: "تم اكتشاف عنق زجاجة متوسط",
+                recommendation: "التوصية",
+                gamingPerformanceEstimator: "مقدر أداء الألعاب",
+                estimatedFps: "معدل الإطارات المقدر للألعاب الشائعة مع المكونات المختارة"
+            },
+            de: {
+                title: "PC-Engpass-Rechner",
+                subtitle: "Finden Sie die perfekte Balance zwischen Ihrer CPU und GPU für optimale Gaming-Leistung",
+                selectCpu: "CPU auswählen",
+                selectGpu: "GPU auswählen",
+                gamingResolution: "Gaming-Auflösung",
+                chooseCpu: "CPU wählen",
+                chooseGpu: "GPU wählen",
+                chooseResolution: "Auflösung wählen",
+                selectedCpu: "Ausgewählte CPU",
+                selectedGpu: "Ausgewählte GPU",
+                calculateBottleneck: "Engpass berechnen",
+                analysisResults: "Analyseergebnisse",
+                moderateBottleneck: "Mäßiger Engpass erkannt",
+                recommendation: "Empfehlung",
+                gamingPerformanceEstimator: "Gaming-Leistungsschätzer",
+                estimatedFps: "Geschätzte FPS für beliebte Spiele mit Ihren ausgewählten Komponenten"
+            },
+            jp: {
+                title: "PCボトルネック計算機",
+                subtitle: "最適なゲーミング性能のためにCPUとGPUの完璧なバランスを見つけてください",
+                selectCpu: "CPUを選択",
+                selectGpu: "GPUを選択",
+                gamingResolution: "ゲーミング解像度",
+                chooseCpu: "CPUを選ぶ",
+                chooseGpu: "GPUを選ぶ",
+                chooseResolution: "解像度を選ぶ",
+                selectedCpu: "選択されたCPU",
+                selectedGpu: "選択されたGPU",
+                calculateBottleneck: "ボトルネックを計算",
+                analysisResults: "分析結果",
+                moderateBottleneck: "中程度のボトルネックが検出されました",
+                recommendation: "推奨事項",
+                gamingPerformanceEstimator: "ゲーミングパフォーマンス推定器",
+                estimatedFps: "選択したコンポーネントでの人気ゲームの推定FPS"
+            },
+            mx: {
+                title: "Calculadora de Cuello de Botella PC",
+                subtitle: "Encuentra el equilibrio perfecto entre tu CPU y GPU para un rendimiento óptimo en juegos",
+                selectCpu: "Seleccionar CPU",
+                selectGpu: "Seleccionar GPU",
+                gamingResolution: "Resolución de Juegos",
+                chooseCpu: "Elegir CPU",
+                chooseGpu: "Elegir GPU",
+                chooseResolution: "Elegir Resolución",
+                selectedCpu: "CPU Seleccionada",
+                selectedGpu: "GPU Seleccionada",
+                calculateBottleneck: "Calcular Cuello de Botella",
+                analysisResults: "Resultados del Análisis",
+                moderateBottleneck: "Cuello de botella moderado detectado",
+                recommendation: "Recomendación",
+                gamingPerformanceEstimator: "Estimador de Rendimiento en Juegos",
+                estimatedFps: "FPS estimado para juegos populares con tus componentes seleccionados"
+            }
+        };
+
+        // Load hardware data from external JSON file or use local fallback
+        async function loadHardwareData() {
+            try {
+                const response = await fetch('./hardware-data.json');
+                if (response.ok) {
+                    hardwareData = await response.json();
+                    console.log('Hardware data loaded successfully');
+                } else {
+                    throw new Error('Could not load hardware data');
+                }
+            } catch (error) {
+                console.log('Using fallback hardware data');
+                // Fallback data
+                hardwareData = {
+                    cpus: [
+                        {"name": "Intel Core i9-13900K", "score": 28500, "image": "https://via.placeholder.com/150x150/4A90E2/FFFFFF?text=i9-13900K"},
+                        {"name": "Intel Core i7-13700K", "score": 25800, "image": "https://via.placeholder.com/150x150/4A90E2/FFFFFF?text=i7-13700K"},
+                        {"name": "Intel Core i5-13600K", "score": 22400, "image": "https://via.placeholder.com/150x150/4A90E2/FFFFFF?text=i5-13600K"},
+                        {"name": "Intel Core i5-12400F", "score": 18600, "image": "https://via.placeholder.com/150x150/4A90E2/FFFFFF?text=i5-12400F"},
+                        {"name": "AMD Ryzen 9 7950X", "score": 29200, "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=R9-7950X"},
+                        {"name": "AMD Ryzen 7 7800X3D", "score": 26800, "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=R7-7800X3D"},
+                        {"name": "AMD Ryzen 7 7700X", "score": 24500, "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=R7-7700X"},
+                        {"name": "AMD Ryzen 5 7600X", "score": 21200, "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=R5-7600X"},
+                        {"name": "AMD Ryzen 5 5600X", "score": 19800, "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=R5-5600X"}
+                    ],
+                    gpus: [
+                        {"name": "NVIDIA RTX 4090", "score": 38500, "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-4090"},
+                        {"name": "NVIDIA RTX 4080", "score": 32400, "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-4080"},
+                        {"name": "NVIDIA RTX 4070 Ti", "score": 28600, "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-4070Ti"},
+                        {"name": "NVIDIA RTX 4070", "score": 25200, "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-4070"},
+                        {"name": "NVIDIA RTX 4060 Ti", "score": 21800, "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-4060Ti"},
+                        {"name": "NVIDIA RTX 4060", "score": 18500, "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-4060"},
+                        {"name": "NVIDIA RTX 3080", "score": 26800, "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-3080"},
+                        {"name": "NVIDIA RTX 3070", "score": 22400, "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-3070"},
+                        {"name": "AMD RX 7900 XTX", "score": 34200, "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=RX-7900XTX"},
+                        {"name": "AMD RX 7900 XT", "score": 30800, "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=RX-7900XT"}
+                    ],
+                    resolutions: ["720p", "1080p", "1440p", "4K"],
+                    games: [
+                        {"name": "Cyberpunk 2077", "icon": "🎮"},
+                        {"name": "Call of Duty: MW3", "icon": "🔫"},
+                        {"name": "Fortnite", "icon": "🏗️"},
+                        {"name": "Apex Legends", "icon": "⚔️"},
+                        {"name": "Baldur's Gate 3", "icon": "🐉"},
+                        {"name": "Spider-Man Remastered", "icon": "🕷️"}
+                    ]
+                };
+            }
+            
+            populateDropdowns();
+        }
+
+        // Populate dropdown menus
+        function populateDropdowns() {
+            const cpuSelect = document.getElementById('cpuSelect');
+            const gpuSelect = document.getElementById('gpuSelect');
+            const resolutionSelect = document.getElementById('resolutionSelect');
+
+            // Clear existing options (except first)
+            cpuSelect.innerHTML = '<option value="" data-translate="chooseCpu">Choose CPU</option>';
+            gpuSelect.innerHTML = '<option value="" data-translate="chooseGpu">Choose GPU</option>';
+            resolutionSelect.innerHTML = '<option value="" data-translate="chooseResolution">Choose Resolution</option>';
+
+            // Populate CPU dropdown
+            hardwareData.cpus.forEach(cpu => {
+                const option = document.createElement('option');
+                option.value = cpu.name;
+                option.textContent = cpu.name;
+                cpuSelect.appendChild(option);
+            });
+
+            // Populate GPU dropdown
+            hardwareData.gpus.forEach(gpu => {
+                const option = document.createElement('option');
+                option.value = gpu.name;
+                option.textContent = gpu.name;
+                gpuSelect.appendChild(option);
+            });
+
+            // Populate Resolution dropdown
+            hardwareData.resolutions.forEach(resolution => {
+                const option = document.createElement('option');
+                option.value = resolution;
+                option.textContent = resolution;
+                resolutionSelect.appendChild(option);
+            });
+        }
+
+        // Handle CPU selection
+        function onCpuChange(cpuName) {
+            selectedCpu = cpuName;
+            console.log('CPU selected:', cpuName);
+            
+            if (cpuName) {
+                const cpu = hardwareData.cpus.find(c => c.name === cpuName);
+                if (cpu && cpu.image) {
+                    const cpuImage = document.getElementById('cpuImage');
+                    cpuImage.innerHTML = `<img src="${cpu.image}" alt="${cpu.name}">`;
+                }
+            }
+            
+            checkCalculateButton();
+        }
+
+        // Handle GPU selection
+        function onGpuChange(gpuName) {
+            selectedGpu = gpuName;
+            console.log('GPU selected:', gpuName);
+            
+            if (gpuName) {
+                const gpu = hardwareData.gpus.find(g => g.name === gpuName);
+                if (gpu && gpu.image) {
+                    const gpuImage = document.getElementById('gpuImage');
+                    gpuImage.innerHTML = `<img src="${gpu.image}" alt="${gpu.name}">`;
+                }
+            }
+            
+            checkCalculateButton();
+        }
+
+        // Handle Resolution selection
+        function onResolutionChange(resolution) {
+            selectedResolution = resolution;
+            console.log('Resolution selected:', resolution);
+            checkCalculateButton();
+        }
+
+        // Check if calculate button should be enabled
+        function checkCalculateButton() {
+            const calculateBtn = document.getElementById('calculateBtn');
+            
+            if (selectedCpu && selectedGpu && selectedResolution) {
+                calculateBtn.disabled = false;
+                calculateBtn.classList.add('enabled');
+                console.log('Calculate button enabled');
+            } else {
+                calculateBtn.disabled = true;
+                calculateBtn.classList.remove('enabled');
+                console.log('Calculate button disabled');
+            }
+        }
+
+        // Calculate bottleneck percentage
+        function calculateBottleneck() {
+            console.log('Calculate button clicked!');
+            console.log('Selected CPU:', selectedCpu);
+            console.log('Selected GPU:', selectedGpu);
+            console.log('Selected Resolution:', selectedResolution);
+            
+            if (!selectedCpu || !selectedGpu || !selectedResolution) {
+                alert('Please select CPU, GPU, and Resolution first!');
+                return;
+            }
+
+            const cpu = hardwareData.cpus.find(c => c.name === selectedCpu);
+            const gpu = hardwareData.gpus.find(g => g.name === selectedGpu);
+
+            if (!cpu || !gpu) {
+                alert('Error finding CPU or GPU data!');
+                return;
+            }
+
+            // Calculate bottleneck percentage
+            const cpuScore = cpu.score;
+            const gpuScore = gpu.score;
+            
+            // Resolution multipliers
+            const resolutionMultipliers = {
+                '720p': 1.0,
+                '1080p': 0.8,
+                '1440p': 0.6,
+                '4K': 0.4
+            };
+            
+            const adjustedGpuScore = gpuScore * (resolutionMultipliers[selectedResolution] || 0.8);
+            const scoreDifference = Math.abs(cpuScore - adjustedGpuScore);
+            const avgScore = (cpuScore + adjustedGpuScore) / 2;
+            const bottleneckPercentage = Math.min(Math.round((scoreDifference / avgScore) * 100), 100);
+
+            console.log('Bottleneck calculated:', bottleneckPercentage + '%');
+
+            // Show results with animation
+            const resultsSection = document.getElementById('resultsSection');
+            const gamingSection = document.getElementById('gamingSection');
+            
+            resultsSection.style.display = 'block';
+            gamingSection.style.display = 'block';
+
+            // Animate percentage display
+            setTimeout(() => {
+                document.getElementById('bottleneckPercentage').textContent = bottleneckPercentage + '%';
+                animateProgressRing(bottleneckPercentage);
+            }, 300);
+
+            // Update status message
+            updateBottleneckStatus(bottleneckPercentage);
+            
+            // Create performance chart
+            createPerformanceChart(cpuScore, gpuScore);
+            
+            // Update gaming performance estimator
+            updateGamingPerformance(cpu, gpu, selectedResolution);
+            
+            // Update recommendation
+            updateRecommendation(bottleneckPercentage, cpuScore > adjustedGpuScore ? 'GPU' : 'CPU');
+
+            // Scroll to results
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Progress ring animation
+        function animateProgressRing(percentage) {
+            const circle = document.getElementById('progressCircle');
+            if (circle) {
+                const circumference = 2 * Math.PI * 90;
+                const offset = circumference - (percentage / 100) * circumference;
+                
+                circle.style.transition = 'stroke-dashoffset 2s ease-in-out';
+                circle.style.strokeDashoffset = offset;
+                
+                // Color based on percentage
+                const gradient = document.getElementById('progressGradient');
+                if (percentage < 15) {
+                    gradient.innerHTML = `
+                        <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#00f5ff;stop-opacity:1" />
+                    `;
+                } else if (percentage < 30) {
+                    gradient.innerHTML = `
+                        <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#ff006e;stop-opacity:1" />
+                    `;
+                } else {
+                    gradient.innerHTML = `
+                        <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#ff006e;stop-opacity:1" />
+                    `;
+                }
+            }
+        }
+
+        // Update bottleneck status message
+        function updateBottleneckStatus(bottleneckPercentage) {
+            const resultStatus = document.getElementById('resultStatus');
+            let statusMessage, statusClass;
+
+            if (bottleneckPercentage <= 10) {
+                statusMessage = 'Excellent! No significant bottleneck';
+                statusClass = 'excellent';
+            } else if (bottleneckPercentage <= 25) {
+                statusMessage = 'Good balance with minimal bottleneck';
+                statusClass = 'good';
+            } else if (bottleneckPercentage <= 50) {
+                statusMessage = 'Moderate bottleneck detected';
+                statusClass = 'moderate';
+            } else {
+                statusMessage = 'Significant bottleneck detected';
+                statusClass = 'significant';
+            }
+
+            resultStatus.innerHTML = `<span class="${statusClass}">${statusMessage}</span>`;
+        }
+
+        // Update recommendation
+        function updateRecommendation(bottleneckPercentage, bottleneckComponent) {
+            const recommendationText = document.getElementById('recommendationText');
+            
+            let recommendation;
+            if (bottleneckComponent === 'CPU') {
+                recommendation = `Your CPU is limiting performance. Consider upgrading to a more powerful CPU to better match your GPU at ${selectedResolution} resolution.`;
+            } else {
+                recommendation = `Your GPU is limiting performance. Consider upgrading to a more powerful GPU to better match your CPU at ${selectedResolution} resolution.`;
+            }
+
+            recommendationText.textContent = recommendation;
+        }
+
+        // Create performance visualization chart
+        function createPerformanceChart(cpuScore, gpuScore) {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (performanceChart) {
+                performanceChart.destroy();
+            }
+
+            const maxScore = Math.max(cpuScore, gpuScore) * 1.1;
+
+            performanceChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['CPU', 'GPU'],
+                    datasets: [{
+                        label: 'Performance Score',
+                        data: [cpuScore, gpuScore],
+                        backgroundColor: [
+                            'rgba(0, 245, 255, 0.8)',
+                            'rgba(255, 0, 110, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 245, 255, 1)',
+                            'rgba(255, 0, 110, 1)'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 8,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(30, 41, 59, 0.95)',
+                            titleColor: '#E2E8F0',
+                            bodyColor: '#E2E8F0',
+                            borderColor: '#00f5ff',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.parsed.y.toLocaleString()} points`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: maxScore,
+                            grid: {
+                                color: 'rgba(0, 245, 255, 0.1)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#94A3B8',
+                                font: {
+                                    size: 12
+                                },
+                                callback: function(value) {
+                                    return (value / 1000).toFixed(0) + 'K';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#E2E8F0',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update gaming performance estimator
+        function updateGamingPerformance(cpu, gpu, resolution) {
+            const gamesGrid = document.getElementById('gamesGrid');
+            gamesGrid.innerHTML = '';
+
+            const games = hardwareData.games;
+
+            games.forEach(game => {
+                const estimatedFps = calculateGameFPS(cpu.score, gpu.score, resolution, game.name);
+                
+                const gameCard = document.createElement('div');
+                gameCard.className = 'game-card';
+                gameCard.innerHTML = `
+                    <div class="game-icon">${game.icon}</div>
+                    <div class="game-info">
+                        <h4>${game.name}</h4>
+                        <div class="game-fps">${estimatedFps} FPS</div>
+                    </div>
+                `;
+                
+                gamesGrid.appendChild(gameCard);
+            });
+        }
+
+        // Calculate estimated FPS for games
+        function calculateGameFPS(cpuScore, gpuScore, resolution, gameName) {
+            const resolutionMultipliers = {
+                '720p': 1.2,
+                '1080p': 1.0,
+                '1440p': 0.7,
+                '4K': 0.4
+            };
+
+            const gameMultipliers = {
+                'Cyberpunk 2077': 0.6,
+                'Call of Duty: MW3': 1.1,
+                'Fortnite': 1.3,
+                'Apex Legends': 1.2,
+                'Baldur\'s Gate 3': 0.8,
+                'Spider-Man Remastered': 0.9
+            };
+
+            const avgScore = (cpuScore + gpuScore) / 2;
+            const baseFps = (avgScore / 500) * (resolutionMultipliers[resolution] || 1.0);
+            const gameFps = baseFps * (gameMultipliers[gameName] || 1.0);
+            
+            return Math.round(Math.max(30, Math.min(240, gameFps)));
+        }
+
+        // Toggle language dropdown
+        function toggleLanguageDropdown() {
+            const languageMenu = document.getElementById('languageMenu');
+            const languageDropdown = document.querySelector('.language-dropdown');
+            
+            languageMenu.classList.toggle('active');
+            languageDropdown.classList.toggle('active');
+        }
+
+        // Change language function
+        function changeLanguage(languageCode, flag, langName) {
+            currentLanguage = languageCode;
+            
+            // Update button display
+            document.querySelector('.current-flag').textContent = flag;
+            document.querySelector('.current-lang').textContent = langName;
+            
+            // Close dropdown
+            document.getElementById('languageMenu').classList.remove('active');
+            document.querySelector('.language-dropdown').classList.remove('active');
+            
+            // Get all elements with data-translate attribute
+            const elements = document.querySelectorAll('[data-translate]');
+            
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[languageCode] && translations[languageCode][key]) {
+                    element.textContent = translations[languageCode][key];
+                }
+            });
+
+            // Update dropdown placeholder texts
+            updateDropdownPlaceholders(languageCode);
+            
+            console.log('Language changed to:', languageCode, langName);
+        }
+
+        // Update dropdown placeholder texts
+        function updateDropdownPlaceholders(languageCode) {
+            const cpuSelect = document.getElementById('cpuSelect');
+            const gpuSelect = document.getElementById('gpuSelect');
+            const resolutionSelect = document.getElementById('resolutionSelect');
+
+            if (translations[languageCode]) {
+                if (cpuSelect.value === '') {
+                    cpuSelect.options[0].textContent = translations[languageCode].chooseCpu || 'Choose CPU';
+                }
+                if (gpuSelect.value === '') {
+                    gpuSelect.options[0].textContent = translations[languageCode].chooseGpu || 'Choose GPU';
+                }
+                if (resolutionSelect.value === '') {
+                    resolutionSelect.options[0].textContent = translations[languageCode].chooseResolution || 'Choose Resolution';
+                }
+            }
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const languageDropdown = document.querySelector('.language-dropdown');
+            const languageMenu = document.getElementById('languageMenu');
+            
+            if (!languageDropdown.contains(event.target)) {
+                languageMenu.classList.remove('active');
+                languageDropdown.classList.remove('active');
+            }
+        });
+
+        // Initialize particles.js for gaming background effect
+        function initParticles() {
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: {
+                            value: 80,
+                            density: {
+                                enable: true,
+                                value_area: 800
+                            }
+                        },
+                        color: {
+                            value: ['#00f5ff', '#ff006e', '#8b5cf6']
+                        },
+                        shape: {
+                            type: 'circle'
+                        },
+                        opacity: {
+                            value: 0.5,
+                            random: false,
+                            anim: {
+                                enable: true,
+                                speed: 1,
+                                opacity_min: 0.1
+                            }
+                        },
+                        size: {
+                            value: 3,
+                            random: true,
+                            anim: {
+                                enable: true,
+                                speed: 40,
+                                size_min: 0.1
+                            }
+                        },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: '#00f5ff',
+                            opacity: 0.2,
+                            width: 1
+                        },
+                        move: {
+                            enable: true,
+                            speed: 2,
+                            direction: 'none',
+                            random: false,
+                            straight: false,
+                            out_mode: 'out',
+                            bounce: false
+                        }
+                    },
+                    interactivity: {
+                        detect_on: 'canvas',
+                        events: {
+                            onhover: {
+                                enable: true,
+                                mode: 'repulse'
+                            },
+                            onclick: {
+                                enable: true,
+                                mode: 'push'
+                            },
+                            resize: true
+                        },
+                        modes: {
+                            repulse: {
+                                distance: 200,
+                                duration: 0.4
+                            },
+                            push: {
+                                particles_nb: 4
+                            }
+                        }
+                    },
+                    retina_detect: true
+                });
+            }
+        }
+
+        // Animate stats counter
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-counter]');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-counter'));
+                let current = 0;
+                const increment = target / 100;
+                const duration = 2000;
+                const stepTime = duration / 100;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(current).toLocaleString();
+                }, stepTime);
+            });
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, initializing...');
+            loadHardwareData();
+            feather.replace();
+            initParticles();
+            setTimeout(animateCounters, 1000);
+        });
+    </script>
+</body>
+</html>

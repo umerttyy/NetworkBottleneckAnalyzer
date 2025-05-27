@@ -1,0 +1,176 @@
+{
+  "cpus": [
+    {
+      "name": "Intel Core i9-13900K",
+      "score": 28500,
+      "image": "https://via.placeholder.com/150x150/4A90E2/FFFFFF?text=i9-13900K"
+    },
+    {
+      "name": "Intel Core i7-13700K",
+      "score": 25800,
+      "image": "https://via.placeholder.com/150x150/4A90E2/FFFFFF?text=i7-13700K"
+    },
+    {
+      "name": "Intel Core i5-13600K",
+      "score": 22400,
+      "image": "https://via.placeholder.com/150x150/4A90E2/FFFFFF?text=i5-13600K"
+    },
+    {
+      "name": "Intel Core i5-12400F",
+      "score": 18600,
+      "image": "https://via.placeholder.com/150x150/4A90E2/FFFFFF?text=i5-12400F"
+    },
+    {
+      "name": "Intel Core i3-12100F",
+      "score": 14200,
+      "image": "https://via.placeholder.com/150x150/4A90E2/FFFFFF?text=i3-12100F"
+    },
+    {
+      "name": "AMD Ryzen 9 7950X",
+      "score": 29200,
+      "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=R9-7950X"
+    },
+    {
+      "name": "AMD Ryzen 7 7800X3D",
+      "score": 26800,
+      "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=R7-7800X3D"
+    },
+    {
+      "name": "AMD Ryzen 7 7700X",
+      "score": 24500,
+      "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=R7-7700X"
+    },
+    {
+      "name": "AMD Ryzen 5 7600X",
+      "score": 21200,
+      "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=R5-7600X"
+    },
+    {
+      "name": "AMD Ryzen 5 5600X",
+      "score": 19800,
+      "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=R5-5600X"
+    }
+  ],
+  "gpus": [
+    {
+      "name": "NVIDIA RTX 4090",
+      "score": 38500,
+      "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-4090"
+    },
+    {
+      "name": "NVIDIA RTX 4080",
+      "score": 32400,
+      "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-4080"
+    },
+    {
+      "name": "NVIDIA RTX 4070 Ti",
+      "score": 28600,
+      "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-4070Ti"
+    },
+    {
+      "name": "NVIDIA RTX 4070",
+      "score": 25200,
+      "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-4070"
+    },
+    {
+      "name": "NVIDIA RTX 4060 Ti",
+      "score": 21800,
+      "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-4060Ti"
+    },
+    {
+      "name": "NVIDIA RTX 4060",
+      "score": 18500,
+      "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-4060"
+    },
+    {
+      "name": "NVIDIA RTX 3080",
+      "score": 26800,
+      "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-3080"
+    },
+    {
+      "name": "NVIDIA RTX 3070",
+      "score": 22400,
+      "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-3070"
+    },
+    {
+      "name": "NVIDIA RTX 3060 Ti",
+      "score": 19600,
+      "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-3060Ti"
+    },
+    {
+      "name": "NVIDIA RTX 3060",
+      "score": 16800,
+      "image": "https://via.placeholder.com/150x150/50C878/FFFFFF?text=RTX-3060"
+    },
+    {
+      "name": "AMD RX 7900 XTX",
+      "score": 34200,
+      "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=RX-7900XTX"
+    },
+    {
+      "name": "AMD RX 7900 XT",
+      "score": 30800,
+      "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=RX-7900XT"
+    },
+    {
+      "name": "AMD RX 7800 XT",
+      "score": 27400,
+      "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=RX-7800XT"
+    },
+    {
+      "name": "AMD RX 7700 XT",
+      "score": 24200,
+      "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=RX-7700XT"
+    },
+    {
+      "name": "AMD RX 6800 XT",
+      "score": 25600,
+      "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=RX-6800XT"
+    },
+    {
+      "name": "AMD RX 6700 XT",
+      "score": 21200,
+      "image": "https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=RX-6700XT"
+    }
+  ],
+  "resolutions": [
+    "720p",
+    "1080p", 
+    "1440p",
+    "4K"
+  ],
+  "games": [
+    {
+      "name": "Cyberpunk 2077",
+      "icon": "🎮"
+    },
+    {
+      "name": "Call of Duty: MW3",
+      "icon": "🔫"
+    },
+    {
+      "name": "Fortnite", 
+      "icon": "🏗️"
+    },
+    {
+      "name": "Apex Legends",
+      "icon": "⚔️"
+    },
+    {
+      "name": "Baldur's Gate 3",
+      "icon": "🐉"
+    },
+    {
+      "name": "Spider-Man Remastered",
+      "icon": "🕷️"
+    },
+    {
+      "name": "Valorant",
+      "icon": "💥"
+    },
+    {
+      "name": "CS2",
+      "icon": "🕸️"
+    }
+  ]
+}
